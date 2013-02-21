@@ -1,0 +1,47 @@
+--Banking.mzp--
+package Banking:
+
+type RoutingNumber -> Integer 100000..999999;
+type AccountNumber -> Integer 100000000..999999999;
+type PositiveFloat -> Float 0..;
+
+--Bank.mz--
+class Bank {
+	var routingNumer : RoutingNumber;
+}
+
+
+--Account.mz--
+class Account;
+
+
+--DepositAccount.mz--
+class DepositAccount -> ns.Account ~[Amount : ns.PositiveFloat] {
+		
+allow get [my.bank]:
+	var bank	: ns.Bank;
+	var account : ns.AccountNumber;
+	var	balance : Amount := 0;
+	var contact : Email;
+	
+allow call [my.bank]:
+
+	BankAccount (my.bank, my.account);
+
+	func deposit(amount : Amount, processOn : Date) -> Float {
+		my.bank.routingNumber as routingNumer;
+		
+		require(my.balance > amount);
+		require(processOn > Now);
+	}
+ 
+	func deposit(amount : Amount, insured : Boolean ?= true ) -> Float {
+		require (my.balance > amount);
+	}
+	
+	func withdraw(amount : Amount) {
+	
+	}
+	
+	op @ (my.contact) -> self;
+}

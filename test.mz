@@ -1,0 +1,29 @@
+
+function globalFunc($var) {
+
+}
+
+
+namespace Mozy:Core:System;
+
+var $globalVar;
+
+function test($varA : Any, $varB ? : Any) {
+	var global:$varC := 'literal string';
+	
+	var parent:$varD := global:std:string($varC : Mozy:Core:ClassD);
+	
+	var $varE := 12 / (4 - 3);
+	
+	$varE++;
+}
+
+if( $varA = 3 ) {
+	
+} 
+elseif ( 1==true ) {
+
+}
+else {
+
+} 
